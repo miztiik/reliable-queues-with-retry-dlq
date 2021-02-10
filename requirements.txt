@@ -1,1 +1,7 @@
 -e .
+aws_cdk.aws_logs
+aws_cdk.aws_iam
+aws_cdk.aws_lambda
+aws_cdk.aws_sqs
+aws_cdk.aws_cloudwatch
+aws_cdk.aws_lambda_event_sources

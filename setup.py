@@ -15,8 +15,8 @@ setuptools.setup(
 
     author="author",
 
-    package_dir={"": "reliable_queues_with_retry_dlq"},
-    packages=setuptools.find_packages(where="reliable_queues_with_retry_dlq"),
+    package_dir={"": "stacks"},
+    packages=setuptools.find_packages(where="stacks"),
 
     install_requires=[
         "aws-cdk.core==1.88.0",
