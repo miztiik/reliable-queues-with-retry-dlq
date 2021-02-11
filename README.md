@@ -105,7 +105,6 @@ In this article, we will build an architecture, similar to the one shown above. 
 
       If you want to know more about the queue parameters, check these pages [3] & [4].
 
-
       Initiate the deployment with the following command,
 
       ```bash
@@ -126,7 +125,15 @@ In this article, we will build an architecture, similar to the one shown above. 
 
       After successfully deploying the stack, Check the `Outputs` section of the stack. You will find the `msgConsumer` lambda function.
 
+    - **Stack: reliable-queues-with-retry-dlq-stack**
 
+      This stack will create the retry lambda that will consume from our `reliable_q_retry_1`. This lambda will ingest the messages back to the main queue with an custom exponential backoff and jitter.
+
+      Initiate the deployment with the following command,
+
+      ```bash
+      cdk deploy reliable-queues-with-retry-dlq-stack
+      ```
 
 1.  ## 🔬 Testing the solution
 
@@ -144,7 +151,7 @@ In this article, we will build an architecture, similar to the one shown above. 
 
        After a couple of minutes, check the consumer cloudwatch logs. Usually the log name should be something like this, `/aws/lambda/queue_consumer_fn_reliable-queues-with-retry-dlq-consumer-stack`. Navigate to the log stream
 
-       You should be finding some sucessfully processed messages like this,
+       You should be finding some successfully processed messages like this,
        ```json
         {
           "resp": {
