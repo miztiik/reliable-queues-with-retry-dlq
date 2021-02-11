@@ -8,8 +8,9 @@ Mystique Unicorn App uses message queues to orchestrate their workflows. The mes
 
 Occasionally the backend consumers will not be able to process the incoming message._For example_, if a user places an order within a certain number of minutes of creating an account, the _producer_ might pass the message with an empty string instead of a `customer identifier`. There are times even valid messages end up in DLQ. Lets take a look at some of them, 
 
-- **Lambda Throttling** - If you are seeing a burst of messages and lambda is your consumer with not enough concurrency, then your lambda will be throttled leaving your messages unprocessed by increment your message receive count.
-- **Lambda Batch Size** - If your lambda receives more messages than it can process within itself time limit, messages will end up in DLQ
+- **Misconfigured Visibility Timeouts** - The SQS visibility timeout should always be greater than the Lambda function’s timeout. If the _lambda consumer function_ has a higher timeout value then in-flight messages can be available again and processed more than once. Functions receive messages in batches, and the messages are deleted from the queue only after the function completes successfully. It means that even if _only one message_ was slow to process, the entire batch can elapse their visibility timeout and become available again in the queue.
+- **Lambda Concurrency** - If you are seeing a burst of messages and lambda is your consumer with not enough concurrency, then your lambda will be throttled leaving your messages unprocessed by increment your message receive count.
+- **SQS/Lambda Batch Size** - If your lambda receives more messages than it can process within itself time limit, messages will end up in DLQ
 
 For these reasons messages that can not be processed in a timely manner must be retried reliably and delivered to a dead-letter message queue. 
 
