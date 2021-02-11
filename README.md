@@ -2,6 +2,7 @@
 
 Mystique Unicorn App uses message queues to orchestrate their workflows. The messages that are ingested in the queues are produced by stores in multiple geographical locations. At times some messages fail to get processed and gets moved to their _Dead Letter Queue(DLQ)_. When the team implemented a retry mechanism for the DLQ, some of the messages gets processed successfully, while others did not, making the retry mechanism get stuck on _bad messages_. Can you help them with a solution that will process these messages reliably.
 
+![Miztiik Automation: Reliable Message Processing with Retry and Dead-Letter-Queues](images/miztiik_automation_reliable_queue_with_retry_and_dlq_000.png)
 
 ## 🎯 Solutions
 
